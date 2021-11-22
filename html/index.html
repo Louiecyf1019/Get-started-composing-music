@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body text-align:center>
+  <canvas id="canvas"></canvas>
+  <div id="wholepage">
+  <div id="header">
+  <img id="logo" src="../pic/logo.png" >
+  <h1 id="webname">从零开始的编曲指南</h1>
+  <div id="usericon"><el-avatar :size="60" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar></div>
+  <p id="userid">Cy9</p>
+  </div>
+  <div id="sider">
+    <el-radio-group v-model="isCollapse" style="margin-bottom: 20px; opacity: 80%;">
+  <el-radio-button :label="false">展开</el-radio-button>
+  <el-radio-button :label="true">收起</el-radio-button>
+</el-radio-group>
+<el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse" style="opacity: 80%;">
+  <el-submenu index="1" >
+    <template slot="title">
+      <i class="el-icon-s-opportunity"></i>
+      <span slot="title">探索</span>
+    </template>
+    <el-menu-item-group>
+      <span slot="title">编曲</span>
+      <el-menu-item index="1-1" id="itmc" >音乐盒</el-menu-item>
+      <a class="jump" href="page1.html"><el-menu-item index="1-2" id="itmc">设计鼓点</el-menu-item></a>
+    </el-menu-item-group>
+    <el-menu-item-group title="音频处理">
+      <a class="jump" href="remix.html"><el-menu-item index="1-3">混音</el-menu-item></a>
+      <a class="jump" href="osc.html"><el-menu-item index="1-4">振荡器</el-menu-item></a>
+    </el-menu-item-group>
+<!--     <el-submenu index="1-4">
+      <span slot="title">选项4</span>
+      <el-menu-item index="1-4-1">选项1</el-menu-item>
+    </el-submenu> -->
+  </el-submenu>
+  <el-menu-item index="2">
+    <i class="el-icon-menu"></i>
+    <span slot="title">探索更多</span>
+  </el-menu-item>
+  <el-menu-item index="3" disabled>
+    <i class="el-icon-document"></i>
+    <span slot="title">教学</span>
+  </el-menu-item>
+  <el-menu-item index="4">
+    <i class="el-icon-setting"></i>
+    <span slot="title">设置</span>
+  </el-menu-item>
+</el-menu>
+  </div>
+<div id="content">
+  <div id="introduction">
+    <h1 id="functitle">音乐盒</h1>
+    <p id="description">你可以通过与页面交互体验音乐的魅力。无需任何经验或设备， 你将在浏览器中完成所有工作。</p>
+  <p>让我们从下面的方格开始。每一方格都录入了一段音乐，点击方格来播放或停止。</p>
+  <p id="instrument"><span id="drum">鼓</span><span id="bass">贝斯</span><span id="chord">和弦</span><span id="lead">旋律</span></p>
+  </div>
+  <div id="musicbox">
+    <div id="box">
+
+      <div class="pat" id="d1" onclick="displayD1()">
+        <audio id="audio1" src="../audio/d1.mp3" loop>
+        </audio>  
+      </div>    
+      <div class="pat" id="b1" onclick="displayB1()" >
+        <audio id="audio2" src="../audio/b1.mp3" loop>
+        </audio>  
+      </div>
+      <div class="pat" id="c1" onclick="displayC1()">
+        <audio id="audio3" src="../audio/c1.mp3" loop>
+        </audio> 
+      </div>
+      <div class="pat" id="m1" onclick="displayM1()">
+        <audio id="audio4" src="../audio/m1.mp3" loop>
+        </audio> 
+      </div>
+      <div class="pat" id="d2" onclick="displayD2()">
+        <audio id="audio5" src="../audio/d2.mp3" loop>
+        </audio> 
+      </div>
+      <div class="pat" id="b2" onclick="displayB2()">
+        <audio id="audio6" src="../audio/b2.mp3" loop>
+        </audio> 
+      </div>
+      <div class="pat" id="c2" onclick="displayC2()">
+        <audio id="audio7" src="../audio/c2.mp3" loop>
+        </audio> 
+      </div>
+      <div class="pat" id="m2" onclick="displayM2()">
+        <audio id="audio8" src="../audio/m2.mp3" loop>
+        </audio> 
+      </div>
+      <div class="pat" id="d3" onclick="displayD3()">
+        <audio id="audio9" src="../audio/d3.mp3" loop>
+        </audio>  
+      </div>    
+      <div class="pat" id="b3" onclick="displayB3()" >
+        <audio id="audio10" src="../audio/b3.mp3" loop>
+        </audio>  
+      </div>
+      <div class="pat" id="c3" onclick="displayC3()">
+        <audio id="audio11" src="../audio/c3.mp3" loop>
+        </audio> 
+      </div>
+      <div class="pat" id="m3" onclick="displayM3()">
+        <audio id="audio12" src="../audio/m3.mp3" loop>
+        </audio> 
+      </div>
+      <div class="pat" id="d4" onclick="displayD4()">
+        <audio id="audio13" src="../audio/d4.mp3" loop>
+        </audio> 
+      </div>
+      <div class="pat" id="b4" onclick="displayB4()">
+        <audio id="audio14" src="../audio/b4.mp3" loop>
+        </audio> 
+      </div>
+      <div class="pat" id="c4" onclick="displayC4()">
+        <audio id="audio15" src="../audio/c4.mp3" loop>
+        </audio> 
+      </div>
+      <div class="pat" id="m4" onclick="displayM4()">
+        <audio id="audio16" src="../audio/m4.mp3" loop>
+        </audio> 
+      </div>
+    </div>
+  </div>
+</div>
+<div id="bottom">
+  <div class="btmtdiv"><p id="btmtxt"><span id="beta">beta</span>&nbsp&nbsp&nbsp&nbspsend your feedback!</p></div>
+  <div class="btmtdiv"><p id="language">English&nbsp&nbsp&nbsp简体中文&nbsp&nbsp&nbsp繁體中文&nbsp&nbsp&nbspDeutsch&nbsp&nbsp&nbspFrançais&nbsp&nbsp&nbsp日本語&nbsp&nbsp&nbsp한국어</p></div>
+  <div class="btmtdiv"></div>
+</div>
+</div>
+
+</body>
+  <!-- import Vue before Element -->
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <!-- import JavaScript -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/bg.js"></script>
+  <script src="../js/musicbox.js"></script>
+
+</html>

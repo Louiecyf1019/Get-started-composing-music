@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body text-align:center>
+  <canvas id="canvas"></canvas>
+  <div id="wholepage">
+  <div id="header">
+  <img id="logo" src="../pic/logo.png" >
+  <h1 id="webname">从零开始的编曲指南</h1>
+  <div id="usericon"><el-avatar :size="60" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar></div>
+  <p id="userid">Cy9</p>
+  </div>
+  <div id="sider">
+    <el-radio-group v-model="isCollapse" style="margin-bottom: 20px; opacity: 80%;">
+  <el-radio-button :label="false">展开</el-radio-button>
+  <el-radio-button :label="true">收起</el-radio-button>
+</el-radio-group>
+<el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse" style="opacity: 80%;">
+  <el-submenu index="1" >
+    <template slot="title">
+      <i class="el-icon-s-opportunity"></i>
+      <span slot="title">探索</span>
+    </template>
+    <el-menu-item-group>
+      <span slot="title">编曲</span>
+      <a class="jump" href="index.html"><el-menu-item index="1-1" id="itmc" >音乐盒</el-menu-item></a>
+      <a class="jump" href="page1.html"><el-menu-item index="1-2" id="itmc">设计鼓点</el-menu-item></a>
+    </el-menu-item-group>
+    <el-menu-item-group title="音频处理">
+      <el-menu-item index="1-3">混音</el-menu-item>
+      <a class="jump" href="osc.html"><el-menu-item index="1-4">振荡器</el-menu-item></a>
+    </el-menu-item-group>
+<!--     <el-submenu index="1-4">
+      <span slot="title">选项4</span>
+      <el-menu-item index="1-4-1">选项1</el-menu-item>
+    </el-submenu> -->
+  </el-submenu>
+  <el-menu-item index="2">
+    <i class="el-icon-menu"></i>
+    <span slot="title">探索更多</span>
+  </el-menu-item>
+  <el-menu-item index="3" disabled>
+    <i class="el-icon-document"></i>
+    <span slot="title">教学</span>
+  </el-menu-item>
+  <el-menu-item index="4">
+    <i class="el-icon-setting"></i>
+    <span slot="title">设置</span>
+  </el-menu-item>
+</el-menu>
+  </div>
+<div id="content">
+  <div id="introduction">
+    <h1 id="functitle">混音</h1>
+    <p id="description">你可以通过与页面交互体验音乐的魅力。无需任何经验或设备， 你将在浏览器中完成所有工作。</p>
+  <p>让我们从下面的效果器开始。通过不同的旋钮设置效果器的参数，从而改变声音的听感。</p>
+  </div>
+  <div id="reverbbox">
+    <div id="abtn">
+      <h2>混响</h2>
+    <el-row id="rpbtn">
+  <el-button type="primary" onclick="guitarplay()">播放</el-button>
+  <el-button  onclick="guitarstop()">暂停</el-button>
+    </el-row>
+    </div>
+    <div class="scrow">
+      <span class="scrowtxt">音量</span>
+      <input type="range" min="0" max="1" step="0.01" value="1" class="scrowbar" id="volumewave" oninput="changevol();"/>
+      <span class="scrowtxt" id="dispvol">1</span>
+    </div>
+    <div class="scrow">
+      <span class="scrowtxt">时间</span>
+      <input type="range" min="0" max="3" step="0.01" value="0.01" class="scrowbar" id="reverbtime" oninput="changert();"/>
+      <span class="scrowtxt" id="disprt">0.01</span>
+    </div>
+    <div class="notecss" id="notert">
+      <img src="../pic/提问.png" class="notepic" alt="帮助" @click="open1" style="cursor:pointer"/>
+    </div>
+    <div class="scrow">
+      <span class="scrowtxt">衰减</span>
+      <input type="range" min="0" max="3" step="0.01" value="0.01" class="scrowbar" id="reverbdecay" oninput="changerd();"/>
+      <span class="scrowtxt" id="disprd">0.01</span>
+    </div>
+    <div class="notecss" id="noterd">
+      <img src="../pic/提问.png" class="notepic" alt="帮助" @click="open2" style="cursor:pointer"/>
+    </div>
+    <div class="scrow">
+      <span class="scrowtxt">发送</span>
+      <input type="range" min="0" max="1" step="0.01" value="0.5" class="scrowbar" id="reverbmix" oninput="changerm();"/>
+      <span class="scrowtxt" id="disprm">0.5</span>
+    </div>
+    <div class="notecss" id="noterm">
+      <img src="../pic/提问.png" class="notepic" alt="帮助" @click="open3"  style="cursor:pointer"/>
+    </div>
+
+  </div>
+  <div class="preset">
+    <h2>混响预设</h2>
+    <div id="repicroll">
+      <img src="../pic/hall.png" alt="大厅混响" class="presetimg">
+      <img src="../pic/studio.png" alt="录音室混响" class="presetimg" style="margin-left: 20px">
+    </div>
+    <div id="rebtnroll">
+      <el-button  onclick="hallreverb()" style="margin-left: 35px">大厅混响</el-button>
+      <el-button  onclick="studioreverb()" style="margin-left: 81px">录音室混响</el-button>
+    </div>
+  </div>
+    <div id="lowpassfilter">
+    <div id="bbtn">
+      <h2 style="margin-bottom:10px ">低通滤波器</h2>
+    <el-row id="fpbtn">
+  <el-button type="primary" onclick="aplay()">播放</el-button>
+  <el-button  onclick="astop()">暂停</el-button>
+    </el-row>
+    </div>
+    <div class="scrow">
+      <span class="scrowtxt">音量</span>
+      <input type="range" min="0" max="1" step="0.01" value="1" class="scrowbar" id="volumewave2" oninput="changevol2();"/>
+      <span class="scrowtxt" id="dispvol2">1</span>
+    </div>
+    <div class="scrow">
+      <span class="scrowtxt">频率</span>
+      <input type="range" min="10" max="22050" step="1" value="22050" class="scrowbar" id="filfreq" oninput="changeff();"/>
+      <span class="scrowtxt" id="dispff">22050</span>
+    </div>
+    <div class="notecss" id="noteff">
+      <img src="../pic/提问.png" class="notepic" alt="帮助" @click="open4" style="cursor:pointer"/>
+    </div>
+    <div class="scrow">
+      <span class="scrowtxt">共振</span>
+      <input type="range" min="0" max="20" step="0.01" value="10" class="scrowbar" id="filpeak" oninput="changefp();"/>
+      <span class="scrowtxt" id="dispfp">10</span>
+    </div>
+    <div class="notecss" id="notefp">
+      <img src="../pic/提问.png" class="notepic" alt="帮助" @click="open5" style="cursor:pointer"/>
+    </div>
+  </div>
+
+  <div class="preset">
+    <h2>滤波器预设与调制</h2>
+    <div id="filpicroll">
+      <img src="../pic/lpf.png" alt="低通滤波" class="presetimg">
+      <img src="../pic/modulate.png" alt="调制" class="presetimg" style="margin-left: 20px">
+    </div>
+    <div id="filbtnroll">
+      <el-button  onclick="lowpf()" style="margin-left: 47px">低通</el-button>
+      <el-button  onclick="lpfmodulate()" style="margin-left: 85px">调制-哇哇效果</el-button>
+    </div>
+  </div>
+
+
+</div>
+<div id="bottom">
+  <div class="btmtdiv"><p id="btmtxt"><span id="beta">beta</span>&nbsp&nbsp&nbsp&nbspsend your feedback!</p></div>
+  <div class="btmtdiv"><p id="language">English&nbsp&nbsp&nbsp简体中文&nbsp&nbsp&nbsp繁體中文&nbsp&nbsp&nbspDeutsch&nbsp&nbsp&nbspFrançais&nbsp&nbsp&nbsp日本語&nbsp&nbsp&nbsp한국어</p></div>
+  <div class="btmtdiv"></div>
+</div>
+</div>
+
+</body>
+  <!-- import Vue before Element -->
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <!-- import JavaScript -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/bg.js"></script>
+  <script src="../js/Pizzicato.js"></script>
+  <script src="../js/soundmanager.js"></script>
+</html>
